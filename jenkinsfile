@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'This is My Build Stage'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'This is My Build Stage'
+            }
+        }
+        stage('Email Sent for approval') {
+            steps {
+                mail to: 'mann991181@gmail.com',
+                subject: "Approval needed for deployement in production",
+                body: """
+                Build #${env.BUILD_NUMBER} is ready for approval
+
+                Click on the following link to approve
+                ${env.BUILD_URL}
+
+                login and click "Proceed" in approval stage
+                """
+            }
+        }
+        stage('Approval') {
+            steps {
+                timeout(time:10,unit:'MINUTES'){
+                    input message: 'Do you want to approve the deployment?', ok:'yes'
+                }
+            }
+        }
+        stage('Deplpoyement') {
+            steps {
+                echo 'Application Deployed'
+            }
+        }
+    }
+}
