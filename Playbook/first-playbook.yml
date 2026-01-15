@@ -1,0 +1,18 @@
+---
+- name: Sample playbook run on a localhost  #creating name
+  hosts: localhost  #giving the local host
+  connection: local
+
+  tasks:
+  - name: Say hello
+    debug: 
+      msg: "This is a first hello"
+
+  - name: Second Say hello
+    debug: 
+      msg: "Another hello from sencon hello"
+
+  - name: create Sample file
+    copy:
+        dest: pwd
+        content: "This file is created by Ansible"

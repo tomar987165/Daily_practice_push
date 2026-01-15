@@ -1,0 +1,6 @@
+all:
+  hosts:
+    server1:
+      ansible_host: ec2-18-207-151-89.compute-1.amazonaws.com
+      ansible_user: ubuntu
+      ansible_ssh_private_key_file: ~/.ssh/Ansible_key.pem
